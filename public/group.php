@@ -19,8 +19,8 @@ $viTriKetThuc = $viTriBatDau + $soMatHangTrenTrang - 1;
 // Cắt mảng $mathang để chỉ lấy phần của trang hiện tại
 $mathangTrangHienTai = array_slice($mathang, $viTriBatDau, $soMatHangTrenTrang);
 ?>
-
-<h3 class="text-info m-3 mt-3"><?php echo $tendm; ?></h3>
+<div class= 'container mb-5'>
+<h3 class="text-primary m-3 mt-3"><?php echo $tendm; ?></h3>
 <div class="row d-flex flex-nowrap overflow-auto gx-4 gx-lg-5">
     <?php
     if ($mathang != null) {
@@ -74,12 +74,12 @@ $mathangTrangHienTai = array_slice($mathang, $viTriBatDau, $soMatHangTrenTrang);
     }
     ?>
 </div>
-<ul class="pagination justify-content-center" style="margin:20px 0">
+<!-- <ul class="pagination justify-content-center" style="margin:20px 0">
     <li class="page-item"><a class="page-link" href="#"><i class="bi bi-caret-left-fill"></i></a></li>
     <li class="page-item"><a class="page-link" href="#">1</a></li>
     <li class="page-item"><a class="page-link" href="#">2</a></li>
     <li class="page-item"><a class="page-link" href="#">3</a></li>
     <li class="page-item"><a class="page-link" href="#"><i class="bi bi-caret-right-fill"></i></a></li>
-</ul>
-
+</ul> -->
+</div>
 <?php include("inc/bottom.php"); ?>

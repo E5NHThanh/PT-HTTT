@@ -23,7 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark  shadow-sm" style="background-color: #87CEFA; ">
         <div class="container-fluid">
-            <a class="navbar-brand text-danger" href="index.php">
+            <a class="navbar-brand text-dark" href="index.php">
                 <img src="../images/logo.jpg" alt="Logo" class="rounded-circle" width="40" height="40">
                 Thas Photography
             </a>

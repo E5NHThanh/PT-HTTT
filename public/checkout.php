@@ -1,8 +1,8 @@
 <?php include("inc/top.php"); ?>
 
-<div class="container">    
+<div class="container mt-4 mb-3">    
   <div class="row"> 
-    <h3>Vui lòng nhập đầy đủ thông tin</h3>
+    <h3 class="text-info">Vui lòng nhập đầy đủ thông tin</h3>
 	<div class="col-sm-6">
 	<h4 class="text-info">Thông tin khách hàng</h4>
 	<?php 
