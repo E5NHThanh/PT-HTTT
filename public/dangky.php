@@ -22,7 +22,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="txtsodienthoai" class="form-label">Số Điện Thoại</label>
-                    <input type="number" class="form-control" id="txtsodienthoai" name="txtsodienthoai" required >
+                    <input type="text" class="form-control" id="txtsodienthoai" name="txtsodienthoai" required>
                 </div>
                 <div class="mb-3">
                     <label for="txtnamsinh" class="form-label">Năm Sinh</label>
@@ -42,10 +42,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="txthinhanh" class="form-label">Hình Ảnh</label>
-                    <input type="file" class="form-control" id="txthinhanh" name="txthinhanh" >
+                    <input type="file" class="form-control" id="txthinhanh" name="txthinhanh">
                 </div>
                 <button id="submitBtn" type="submit" class="btn btn-primary w-100" disabled>Đăng Ký</button>
-</br></br>
+                </br></br>
             </form>
         </div>
     </div>
@@ -60,7 +60,7 @@
         var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         var feedback = this.nextElementSibling;
         if (!emailValid) {
-            feedback.textContent = "Email không hợp lệ";
+            feedback.textContent = "Email phải bắt buộc có @ và gmail.com";
             feedback.classList.add("invalid-feedback");
             this.classList.add("is-invalid");
         } else {
@@ -104,20 +104,20 @@
     });
 
     document.getElementById("txtsodienthoai").addEventListener("input", function(event) {
-    var phone = this.value;
-    var phoneValid = /^(0\d{9})$/.test(phone);
-    var feedback = this.nextElementSibling;
-    if (!phoneValid) {
-        feedback.textContent = "Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 số";
-        feedback.classList.add("invalid-feedback");
-        this.classList.add("is-invalid");
-    } else {
-        feedback.textContent = "";
-        feedback.classList.remove("invalid-feedback");
-        this.classList.remove("is-invalid");
-    }
-    checkSubmitButton();
-});
+        var phone = this.value;
+        var phoneValid = /^(0\d{9})$/.test(phone);
+        var feedback = this.nextElementSibling;
+        if (!phoneValid) {
+            feedback.textContent = "Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 số";
+            feedback.classList.add("invalid-feedback");
+            this.classList.add("is-invalid");
+        } else {
+            feedback.textContent = "";
+            feedback.classList.remove("invalid-feedback");
+            this.classList.remove("is-invalid");
+        }
+        checkSubmitButton();
+    });
 
 
     // Hàm kiểm tra điều kiện và kích hoạt hoặc vô hiệu hóa nút Đăng ký
@@ -128,11 +128,9 @@
         var phoneValid = /^\d{10}$/.test(document.getElementById("txtsodienthoai").value);
         var submitButton = document.getElementById("submitBtn");
         if (emailValid && passwordValid && nameValid && phoneValid) {
-            submitButton.removeAttribute("disabled");
+            submitButton.removeAttribute("disabled");   
         } else {
             submitButton.setAttribute("disabled", "disabled");
         }
     }
 </script>
-
-

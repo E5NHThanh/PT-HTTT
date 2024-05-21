@@ -1,7 +1,27 @@
 <?php include("inc/top.php"); ?>
+<?php
+// Số mặt hàng trên mỗi trang
+$soMatHangTrenTrang = 9; // Giả sử mỗi trang hiển thị 9 mặt hàng
+
+// Tổng số mặt hàng
+$tongSoMatHang = count($mathang); // Đây là số mặt hàng bạn có
+
+// Tính toán số trang
+$soTrang = ceil($tongSoMatHang / $soMatHangTrenTrang);
+
+// Xác định trang hiện tại
+$trangHienTai = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Tính toán vị trí bắt đầu và kết thúc của mặt hàng trên từng trang
+$viTriBatDau = ($trangHienTai - 1) * $soMatHangTrenTrang;
+$viTriKetThuc = $viTriBatDau + $soMatHangTrenTrang - 1;
+
+// Cắt mảng $mathang để chỉ lấy phần của trang hiện tại
+$mathangTrangHienTai = array_slice($mathang, $viTriBatDau, $soMatHangTrenTrang);
+?>
 
 <h3 class="text-info m-3 mt-3"><?php echo $tendm; ?></h3>
-<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<div class="row d-flex flex-nowrap overflow-auto gx-4 gx-lg-5">
     <?php
     if ($mathang != null) {
         foreach ($mathang as $m) :

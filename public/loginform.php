@@ -7,7 +7,10 @@
 				<div class="col-sm-8 col-md-6 col-lg-7 col-xl-6 mx-auto d-table h-100">
 					<div class="d-table-cell align-middle">
 
-						<div class="text-center mt-4">
+					
+						<div class="text-center mb-4">
+						<img src="../images/login.jpg" alt="" height="100">
+
 							<h1 class="h1">Đăng Nhập</h1>
 						</div>
 						<div class="card">
@@ -22,7 +25,7 @@
 											<input class="btn btn-info btn-block" type="submit" value="Đăng nhập">
 										</div>
 									</form>
-									<a class="btn btn-outline-primary" href="index.php?action=dangky">Dang ky ngay</a>
+									<a  href="index.php?action=dangky">Đăng ký ngay</a>
 								</div>
 							</div>
 						</div>

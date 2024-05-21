@@ -6,38 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kết quả tìm kiếm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <style>
-        .mathang-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .mathang-item:last-child {
-            border-bottom: none;
-        }
-
-        .mathang-item img {
-            border-radius: 5px;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-
-        .mathang-item h5 {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .mathang-item p {
-            margin: 0.2rem 0;
-        }
-
-        .no-result-message {
-            padding: 10px;
-            color: #888;
-        }
-    </style> -->
+    
 </head>
 
 <body>

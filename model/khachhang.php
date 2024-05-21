@@ -101,4 +101,20 @@ class KHACHHANG
 	{
 		return count($_SESSION['nguoidung']);
 	}
+	
+    public  function laykhtheoid($id)
+    {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM nguoidung WHERE id = :id";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':id', $id);
+            $cmd->execute();
+            return $cmd->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Xử lý ngoại lệ nếu có
+            echo "Lỗi: " . $e->getMessage();
+            return false; // Trả về false nếu không thể lấy được học viên
+        }
+    }
 }

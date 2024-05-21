@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="css/search.css" />
 
     <title>Thas </title>
+    <!-- awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -19,9 +21,9 @@
 <body id="top">
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark  shadow-sm" style="background-color: #87CEFA; ">
         <div class="container-fluid">
-            <a class="navbar-brand text-warning" href="index.php">
+            <a class="navbar-brand text-danger" href="index.php">
                 <img src="../images/logo.jpg" alt="Logo" class="rounded-circle" width="40" height="40">
                 Thas Photography
             </a>
@@ -29,15 +31,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Trang chính</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item ">
+                        <a class="nav-link active text-dark" aria-current="page" href="index.php">Trang chính</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="?action=gioithieu">Giới thiệu</a>
+                        <a class="nav-link active text-dark" href="?action=gioithieu">Giới thiệu</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Danh sách sản phẩm</a>
+                        <a class="nav-link active dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Danh sách sản phẩm</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php foreach ($danhmuc as $d) : ?>
                                 <li>
@@ -49,11 +51,13 @@
                         </ul>
                     </li>
                 </ul>
+                <!-- search -->
                 <form class="d-flex position-relative" method="get" action="search_result.php">
                     <input class="form-control me-2" type="search" name="keyword" id="search-input" placeholder="Nhập sản phẩm cần tìm!" aria-label="Search">
                     <!-- <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button> -->
                     <div id="search-suggestions" class="position-absolute bg-white"></div>
                 </form>
+                <!-- end search -->
                 <div class="d-flex align-items-center ms-3">
                     <?php if (isset($_SESSION["khachhang"])) { ?>
                         <span class="text-light me-2">Chào, <?php echo $_SESSION["khachhang"]["hoten"]; ?></span>
