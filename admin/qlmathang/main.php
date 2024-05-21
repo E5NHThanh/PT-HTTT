@@ -29,7 +29,8 @@
 			<td><?php echo $m["soluongton"]; ?></td>
 			<td>
 				<a href="index.php?action=chitiet&id=<?php echo $m["id"]; ?>">
-					<img src="/Web Camera/images/product/<?php echo $m["hinhanh"]; ?>" width="80" class="img-thumbnail"></a>
+					<img width="100" src="../../images/product/<?php echo $m["hinhanh"]; ?> ">
+				</a>
 			</td>
 			<td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $m["id"]; ?>"><i class="align-middle" data-feather="edit"></a></td>
 			<td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $m["id"]; ?>"><i class="align-middle" data-feather="trash-2"></a></td>

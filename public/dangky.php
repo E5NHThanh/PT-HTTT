@@ -1,114 +1,138 @@
-<?php include("inc/top.php"); ?>
+<?php include("inc/top.php") ?>
 
-
-
-<div class="container mt-5 p-5">    
-  <div class="row"> 
-    <h3>Vui lòng nhập đầy đủ thông tin</h3>
-	<div class="col-sm-6">
-	<h4 class="text-info">Thông tin khách hàng</h4>
-	
-	<style>
-        form {
-            max-width: 500px;
-            margin: auto;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <form action="index.php" method="post">
-        <h2>Đăng ký thông tin</h2>
-        <label for="hoten">Họ và tên:</label>
-        <input type="text" id="hoten" name="hoten" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-		<!-- <label for="pass">Pass:</label>
-        <input type="pass" id="pass" name="pass" required> -->
-
-
-        <label for="ngaysinh">Ngày sinh:</label>
-        <input type="date" id="namsinh" name="namsinh" required>
-        <label for="sodienthoai">Số điện thoại:</label>
-        <input type="text" id="sodienthoai" name="sodienthoai" required>
-        <label for="diachi">Địa chỉ:</label>
-        <input type="text" id="diachi" name="diachi">
-        <input type="submit" value="Đăng ký">
-    </form>
-
-	<form method="post"  action="index.php">
-		<input type="hidden" name="action" value="luudonhang">
-		<div class="my-3">
-			<label>Email</label>
-			<input type="email" class="form-control" name="txtemail" required>
-		</div>
-		<div class="my-3">
-			<label>Passwork</label>
-			<input type="pass" class="form-control" name="txtpass" required>s
-		</div>
-		<div class="my-3">
-			<label>Họ tên</label>
-			<input type="text" class="form-control" name="txthoten" required>
-		</div>
-		<div class="my-3">
-			<label>Số điện thoại</label>
-			<input type="text" class="form-control" name="txtdienthoai" required>
-		</div>
-		<div class="my-3">
-			<label>Địa chỉ</label>
-			<textarea class="form-control" name="txtdiachi" required></textarea>
-		</div>
-		<div class="my-3">
-			<input type="submit" value="Hoàn tất đơn hàng" class="btn btn-primary">
-		</div>
-	</form>
-	
-	</div>
-	<!-- <div class="col-sm-6">
-	<h4 class="text-info">Thông tin đơn hàng</h4>
-		<table class="table table-bordered">
-		<tr class="table-info">
-		<th>Sản phẩm</th> 
-		<th>Đơn giá</th>
-		<th>Số lượng</th>
-		<th>Thành tiền</th>
-		</tr>
-		<php foreach($giohang as $id => $mh): ?>
-		<tr>
-		<td><img width="50" src="../images/product/<php echo $mh["hinhanh"]; ?>"><php echo $mh["tenmathang"]; ?></td>
-		<td><php echo number_format($mh["giaban"]) . "đ"; ?></td>
-		<td><\?php echo $mh["soluong"]; ?></td>
-		<td><php echo number_format($mh["thanhtien"]) . "đ"; ?></td>
-		</tr>
-		<php endforeach; ?>
-		<tr class="table-info">
-		<td colspan="3" class="text-end"><b>Tổng tiền</b></td>
-		<td><b><php echo number_format( 878); ?>đ</b></td>
-		</tr>
-		</table>
-	</div> -->
-    
-  </div> 
- 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Form Đăng Ký</h2>
+            <form id="registrationForm" action="index.php?action=themdangky" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="txtemail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="txtemail" name="txtemail" required>
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="txtpass" class="form-label">Mật Khẩu</label>
+                    <input type="password" class="form-control" id="txtpass" name="txtpass" required>
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="txthoten" class="form-label">Họ Tên</label>
+                    <input type="text" class="form-control" id="txthoten" name="txthoten" required>
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="txtsodienthoai" class="form-label">Số Điện Thoại</label>
+                    <input type="number" class="form-control" id="txtsodienthoai" name="txtsodienthoai" required >
+                </div>
+                <div class="mb-3">
+                    <label for="txtnamsinh" class="form-label">Năm Sinh</label>
+                    <input type="text" class="form-control" id="txtnamsinh" name="txtnamsinh" required>
+                </div>
+                <div class="mb-3">
+                    <label for="txtgioitinh" class="form-label">Giới Tính</label>
+                    <select class="form-select" id="txtgioitinh" name="txtgioitinh" required>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="txtdiachi" class="form-label">Địa Chỉ</label>
+                    <input type="text" class="form-control" id="txtdiachi" name="txtdiachi" required>
+                </div>
+                <div class="mb-3">
+                    <label for="txthinhanh" class="form-label">Hình Ảnh</label>
+                    <input type="file" class="form-control" id="txthinhanh" name="txthinhanh" >
+                </div>
+                <button id="submitBtn" type="submit" class="btn btn-primary w-100" disabled>Đăng Ký</button>
+</br></br>
+            </form>
+        </div>
+    </div>
 </div>
 
-<?php include("inc/bottom.php"); ?>
+<?php include("inc/bottom.php") ?>
+
+<script>
+    // Bắt sự kiện khi người dùng nhập dữ liệu
+    document.getElementById("txtemail").addEventListener("input", function(event) {
+        var email = this.value;
+        var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        var feedback = this.nextElementSibling;
+        if (!emailValid) {
+            feedback.textContent = "Email không hợp lệ";
+            feedback.classList.add("invalid-feedback");
+            this.classList.add("is-invalid");
+        } else {
+            feedback.textContent = "";
+            feedback.classList.remove("invalid-feedback");
+            this.classList.remove("is-invalid");
+        }
+        checkSubmitButton();
+    });
+
+    document.getElementById("txtpass").addEventListener("input", function(event) {
+        var password = this.value;
+        var passwordValid = /^(?=.*[!@#$%^&*])(?=.{5,})/.test(password);
+        var feedback = this.nextElementSibling;
+        if (!passwordValid) {
+            feedback.textContent = "Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt";
+            feedback.classList.add("invalid-feedback");
+            this.classList.add("is-invalid");
+        } else {
+            feedback.textContent = "";
+            feedback.classList.remove("invalid-feedback");
+            this.classList.remove("is-invalid");
+        }
+        checkSubmitButton();
+    });
+
+    document.getElementById("txthoten").addEventListener("input", function(event) {
+        var name = this.value;
+        var nameValid = !/\d/.test(name);
+        var feedback = this.nextElementSibling;
+        if (!nameValid) {
+            feedback.textContent = "Tên không được chứa số";
+            feedback.classList.add("invalid-feedback");
+            this.classList.add("is-invalid");
+        } else {
+            feedback.textContent = "";
+            feedback.classList.remove("invalid-feedback");
+            this.classList.remove("is-invalid");
+        }
+        checkSubmitButton();
+    });
+
+    document.getElementById("txtsodienthoai").addEventListener("input", function(event) {
+    var phone = this.value;
+    var phoneValid = /^(0\d{9})$/.test(phone);
+    var feedback = this.nextElementSibling;
+    if (!phoneValid) {
+        feedback.textContent = "Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 số";
+        feedback.classList.add("invalid-feedback");
+        this.classList.add("is-invalid");
+    } else {
+        feedback.textContent = "";
+        feedback.classList.remove("invalid-feedback");
+        this.classList.remove("is-invalid");
+    }
+    checkSubmitButton();
+});
+
+
+    // Hàm kiểm tra điều kiện và kích hoạt hoặc vô hiệu hóa nút Đăng ký
+    function checkSubmitButton() {
+        var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("txtemail").value);
+        var passwordValid = /^(?=.*[!@#$%^&*])(?=.{5,})/.test(document.getElementById("txtpass").value);
+        var nameValid = !/\d/.test(document.getElementById("txthoten").value);
+        var phoneValid = /^\d{10}$/.test(document.getElementById("txtsodienthoai").value);
+        var submitButton = document.getElementById("submitBtn");
+        if (emailValid && passwordValid && nameValid && phoneValid) {
+            submitButton.removeAttribute("disabled");
+        } else {
+            submitButton.setAttribute("disabled", "disabled");
+        }
+    }
+</script>
+
+

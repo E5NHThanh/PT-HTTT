@@ -8,22 +8,19 @@
 	<tr>
 		<th>ID đơn hàng</th>
 		<th>Tên khách hàng</th>
-		<th>Địa chỉ</th>
 		<th>Ngày</th>		
 		<th>Tổng tiền</th>
-		<th>Sửa</th>
 
 	</tr>
 	<?php 
 	foreach ($donhang as $dh): 
 	?>
 	<tr>
-			<td><?php echo $dh["id"]; ?></td>
+			<td><?php echo $dh["hoadon_id"]; ?></td>
 			<td><?php echo $dh["nguoidung_id"]; ?></td>
-			<td><?php echo $dh["diachi_id"]; ?></td>
-			<td><?php echo $dh["ngay"]; ?></td>
+			<td><?php echo date('d/m/Y H:i:s', strtotime($dh["ngay"])); ?></td>
 			<td><?php echo number_format($dh["tongtien"]) ?> VNĐ</td>
-			<td><a href="index.php?action=chitiet&id=<?php echo $dh["id"]; ?>" class="btn btn-warning">Chi tiết</a></td>
+			<td><a href="index.php?action=chitiet&id=<?php echo $dh["hoadon_id"]; ?>" class="btn btn-warning">Chi tiết</a></td>
 		</tr>
 	<?php
 	endforeach;

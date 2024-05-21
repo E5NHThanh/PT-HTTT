@@ -19,48 +19,124 @@
 <body id="top">
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
-        <div class="container px-2 px-lg-3">
-            <a class="navbar-brand text-warning" href="index.php"><img class="rounded-circle  text-center" src="../images/logo.jpg" width="60px" height="60px">
-                </i> Thas Photoraphy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Trang chính</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="?action=gioithieu">Giới thiệu</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand text-warning" href="index.php">
+                <img src="../images/logo.jpg" alt="Logo" class="rounded-circle" width="40" height="40">
+                Thas Photography
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Trang chính</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="?action=gioithieu">Giới thiệu</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Danh sách sản phẩm</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php foreach ($danhmuc as $d) : ?>
-                                <li><a class="dropdown-item" href="?action=group&id=<?php echo $d["id"]; ?>">
-                                        <?php echo $d["tendongmay"]; ?></a></li>
+                                <li>
+                                    <a class="dropdown-item" href="?action=group&id=<?php echo $d['id']; ?>">
+                                        <?php echo $d['tendongmay']; ?>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
                 </ul>
-                <nav class="navbar bg-primary-tertiary">
-                    <div class="container-fluid">
-                        <form method="get" class="d-flex" action="search.php">
-                            <input type="search" class="form-control me-2" name="keyword" id="search-input" placeholder="Nhập sản phẩm cần tìm!" aria-label="Search">
-                            <div id="search-suggestions" class="mt-5"></div>
-                            <button class="btn btn-outline-danger" type="submit" id="search-button"><i class="bi bi-search"></i></button>
-                        </form>
-                    </div>
-                </nav>
-                    <div class="d-flex px-3 ">
-                        <?php if (isset($_SESSION["khachhang"])) { ?>
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                                <li class="nav-item"><a class="nav-link text-warning" href="index.php?action=thongtin">Chào <?php echo $_SESSION["khachhang"]["hoten"]; ?></a></li>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=dangxuat">Đăng xuất</a></li>
-                            </ul>
-                        <?php } else { ?>
-                            <a href="index.php?action=dangnhap" class="btn btn-outline-light"><i class="bi bi-person"></i> Đăng nhập</a>
-                        <?php } ?> &nbsp;
-
-                        <a href="index.php?action=giohang" class="btn btn-outline-light"><i class="bi bi-cart3"></i> Giỏ hàng <span class="badge bg-danger text-white ms-1 rounded-pill"><?php echo demhangtronggio() ?></span></a>
-                    </div>
+                <form class="d-flex position-relative" method="get" action="search_result.php">
+                    <input class="form-control me-2" type="search" name="keyword" id="search-input" placeholder="Nhập sản phẩm cần tìm!" aria-label="Search">
+                    <!-- <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button> -->
+                    <div id="search-suggestions" class="position-absolute bg-white"></div>
+                </form>
+                <div class="d-flex align-items-center ms-3">
+                    <?php if (isset($_SESSION["khachhang"])) { ?>
+                        <span class="text-light me-2">Chào, <?php echo $_SESSION["khachhang"]["hoten"]; ?></span>
+                        <a href="index.php?action=thongtin" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-person"></i></a>
+                        <a href="index.php?action=dangxuat" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-box-arrow-right"></i></a>
+                    <?php } else { ?>
+                        <a href="index.php?action=dangnhap" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-person"></i></a>
+                    <?php } ?>
+                    <a href="index.php?action=giohang" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-cart3"></i> <span class="badge bg-danger text-white ms-1 rounded-pill"><?php echo demhangtronggio(); ?></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchSuggestions = document.getElementById('search-suggestions');
 
+            searchInput.addEventListener('input', function(e) {
+                const keyword = e.target.value.trim(); // Lấy từ khoá và loại bỏ khoảng trắng thừa
+
+                // Kiểm tra nếu từ khoá không rỗng
+                if (keyword !== '') {
+                    fetchSuggestions(keyword);
+                } else {
+                    searchSuggestions.innerHTML = ''; // Nếu từ khoá rỗng, xóa gợi ý
+                }
+            });
+
+            function fetchSuggestions(keyword) {
+                // Gửi yêu cầu đến server để lấy gợi ý
+                fetch(`search.php?keyword=${keyword}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Hiển thị danh sách gợi ý trong #search-suggestions
+                        searchSuggestions.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Fetch Error:', error);
+                    });
+            }
+        });
+    </script>
+    <style>
+        #search-suggestions {
+            background-color: beige;
+            border: 0px solid #1eb299;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            position: absolute;
+            width: 300px;
+            z-index: 1000;
+            display: block;
+            text-align: center;
+            color: black;
+            margin-left: 0px;
+            margin-top: 40px;
+            flex-direction: row;
+            justify-content: flex-start;
+
+        }
+
+        #search-suggestions .suggestion-item {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            color: darkslategray;
+            padding-left: 15px;
+            padding-right: 15px;
+            text-decoration: none;
+            align-items: center;
+        }
+
+        #search-suggestions .suggestion-item:hover {
+            background-color: aqua;
+        }
+        #search-suggestions .suggestion-item .text-item{
+            text-decoration: none;
+            color: black;
+            padding-top: 15px;
+            padding-bottom: 40px;
+        }
+    </style>
     <!-- Section-->

@@ -27,7 +27,7 @@ class DONHANGCT{
 	public function laydonhangct(){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "SELECT * FROM donhangct";
+            $sql = "SELECT * FROM donhangct;";
             $cmd = $dbcon->prepare($sql);
             $cmd->execute();
             $result = $cmd->fetchAll();
@@ -44,7 +44,25 @@ class DONHANGCT{
 	{
 		$dbcon = DATABASE::connect();
 		try{
-			$sql = "SELECT * FROM donhangct WHERE id=:id";
+			$sql = "SELECT 
+			hdc.id,
+			hdc.donhang_id,
+			kh.tenmathang AS mathang_ten,
+			hdc.dongia,
+			hdc.soluong,
+			hdc.thanhtien,
+			nd.hoten AS hoten_nguoidung
+		FROM 
+			donhangct hdc
+		LEFT JOIN 
+			mathang kh ON hdc.mathang_id = kh.id
+		LEFT JOIN 
+			donhang hd ON hdc.donhang_id = hd.id
+		LEFT JOIN 
+			nguoidung nd ON hd.nguoidung_id = nd.id
+		WHERE 
+			hdc.donhang_id = :id
+		";
 			$cmd = $dbcon->prepare($sql);
 			$cmd->bindValue(":id", $id);
 			$cmd->execute();

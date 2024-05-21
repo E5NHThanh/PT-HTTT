@@ -17,7 +17,7 @@
         <tr>
             <td><?php echo $dhct["id"]; ?></td>
             <td><?php echo $dhct["donhang_id"]; ?></td>
-            <td><?php echo $dhct["mathang_id"]; ?></td>
+            <td><?php echo $dhct["mathang_ten"]; ?></td>
             <td><?php echo number_format($dhct["dongia"]); ?> VNĐ</td>
             <td><?php echo $dhct["soluong"]; ?></td>
             <td><?php echo number_format($dhct["thanhtien"]); ?> VNĐ</td>

@@ -21,12 +21,9 @@
 		</div>
 		<div class="my-3">
 			<label>Số điện thoại</label>
-			<input type="text" class="form-control" name="txtdienthoai" value="<?php echo $_SESSION["khachhang"]["sdt"] ?>" disabled>
+			<input type="text" class="form-control" name="txtdienthoai" value="<?php echo $_SESSION["khachhang"]["sodienthoai"] ?>" disabled>
 		</div>
-		<div class="my-3">
-			<label>Địa chỉ giao hàng</label>
-			<textarea class="form-control" name="txtdiachi" required></textarea>
-		</div>
+		
 		<div class="my-3">
 			<input type="submit" value="Hoàn tất đơn hàng" class="btn btn-primary">
 		</div>
@@ -49,10 +46,7 @@
 			<label>Số điện thoại</label>
 			<input type="text" class="form-control" name="txtdienthoai" required>
 		</div>
-		<div class="my-3">
-			<label>Địa chỉ</label>
-			<textarea class="form-control" name="txtdiachi" required></textarea>
-		</div>
+		
 		<div class="my-3">
 			<input type="submit" value="Hoàn tất đơn hàng" class="btn btn-primary">
 		</div>

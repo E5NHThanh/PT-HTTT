@@ -19,7 +19,7 @@
         </p>
       </div>
       <div class="col-md-6 text-warning">
-        <h4 class="text-dark">DANH MỤC HÀNG</h4>
+        <h4 class="text-light">DANH MỤC HÀNG</h4>
         <?php foreach ($danhmuc as $d) : ?>
           <a class="list-group-item" href="?action=group&id=<?php echo $d["id"]; ?>">
             <?php echo $d["tendongmay"]; ?>
@@ -34,7 +34,7 @@
       </div> -->
     </div>
 
-    <div class=" row"><span class="m-0 text-center text-dark"><i>NguyenThanhTu & NguyenHoaiThanh</i></span>
+    <div class=" row"><span class="m-0 text-center text-light"><i>NguyenThanhTu & NguyenHoaiThanh</i></span>
     </div>
   </div>
 </footer>

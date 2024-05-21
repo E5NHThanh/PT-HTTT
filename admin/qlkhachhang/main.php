@@ -13,7 +13,7 @@
   }
   ?>
   <!-- Nút mở hộp modal chứa form thêm mới -->
-  <div><a class="btn btn-info" href="index.php?action=them"><span class="glyphicon glyphicon-plus" data-feather= "plus-circle"></span> Thêm khách hàng mới+</a></div>
+  <div><a class="btn btn-info" href="index.php?action=them"><span class="glyphicon glyphicon-plus" data-feather= "plus-circle"></span> Thêm khách hàng mới</a></div>
   <br>
   <!-- Danh sách người dùng -->
   <table class="table table-hover">
@@ -29,7 +29,7 @@
       <?php if ($nd["loai"] == 3) { ?>
         <tr>
           <td><?php echo $nd["email"]; ?></td>
-          <td><?php echo $nd["sdt"]; ?></td>
+          <td><?php echo $nd["sodienthoai"]; ?></td>
           <td><?php echo $nd["hoten"]; ?></td>
           <td><?php if ($nd["loai"] == 1) echo "Quản trị";
               else if ($nd["loai"] == 2) echo "Nhân viên";

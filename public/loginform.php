@@ -22,6 +22,7 @@
 											<input class="btn btn-info btn-block" type="submit" value="Đăng nhập">
 										</div>
 									</form>
+									<a class="btn btn-outline-primary" href="index.php?action=dangky">Dang ky ngay</a>
 								</div>
 							</div>
 						</div>

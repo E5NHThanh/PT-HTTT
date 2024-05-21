@@ -99,7 +99,6 @@ switch ($action) {
         include("checkout.php");
         break;
     case "luudonhang":
-        $diachi = $_POST["txtdiachi"];
         if (!isset($_SESSION["khachhang"])) {
             $email = $_POST["txtemail"];
             $hoten = $_POST["txthoten"];
@@ -116,14 +115,12 @@ switch ($action) {
             //$diachi = $dc->laydiachikhachhang($khachhang_id);            
             //$diachi_id = $diachi["id"];
         }
-        // lưu địa chỉ giao hàng
-        $dc = new DIACHI();
-        $diachi_id = $dc->themdiachi($khachhang_id, $diachi);
+       
 
         // lưu đơn hàng
         $dh = new DONHANG();
         $tongtien = tinhtiengiohang();
-        $donhang_id = $dh->themdonhang($khachhang_id, $diachi_id, $tongtien);
+        $donhang_id = $dh->themdonhang($khachhang_id, $tongtien);
 
         // lưu chi tiết đơn hàng
         $ct = new DONHANGCT();
@@ -189,6 +186,39 @@ switch ($action) {
         $mathang = $mh->laymathang();
         include("main.php");
         break;
+        case "dangky":
+            include("dangky.php");
+            break;
+    
+        case "themdangky":
+            if (!isset($_SESSION["khachhang"])) {
+                $email = $_POST["txtemail"];
+                $matkhau = $_POST["txtpass"];
+                $hoten = $_POST["txthoten"];
+                $sodienthoai = $_POST["txtsodienthoai"];
+                $namsinh = $_POST["txtnamsinh"];
+                $gioitinh = $_POST["txtgioitinh"];
+                $diachi = $_POST["txtdiachi"];
+                // Xác định thư mục lưu trữ ảnh
+                $thumuc_luutru = "image/users/";
+    
+                // Tạo đường dẫn đầy đủ cho file ảnh
+                $duongdan = "../" . $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
+                    // Tiếp theo, bạn có thể sử dụng biến $thumuc_luutru để lưu đường dẫn trong cơ sở dữ liệu.
+                // Ví dụ:
+                $hinhanh = $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
+    
+                // lưu thông tin khách nếu chưa có trong db (kiểm tra email có tồn tại chưa)
+                // xử lý thêm...
+                $kh = new KHACHHANG();
+                $khachhang_id = $kh->themdangky($email, $sodienthoai, $matkhau, $hoten, $hinhanh, $gioitinh, $diachi,$namsinh);
+            } else {
+                $khachhang_id = $_SESSION["khachhang"]["id"];
+            }
+    
+            include("loginform.php");
+            break;
+    
     default:
         break;
 }

@@ -28,7 +28,7 @@
     <?php foreach ($nguoidung as $nd) : ?>
       <tr>
         <td><?php echo $nd["email"]; ?></td>
-        <td><?php echo $nd["sdt"]; ?></td>
+        <td><?php echo $nd["sodienthoai"]; ?></td>
         <td><?php echo $nd["hoten"]; ?></td>
         <td><?php if ($nd["loai"] == 1) echo "Quản trị";
             else if ($nd["loai"] == 2) echo "Nhân viên";

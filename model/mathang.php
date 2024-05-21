@@ -102,7 +102,7 @@ class MATHANG
     {
         $dbcon = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM mathang ORDER BY id DESC";
+            $sql = "SELECT * FROM mathang ";
             $cmd = $dbcon->prepare($sql);
             $cmd->execute();
             $result = $cmd->fetchAll();
@@ -279,21 +279,16 @@ class MATHANG
     {
         $dbcon = DATABASE::connect();
         try {
+            $keyword = strtolower($keyword);
             $sql = "SELECT * FROM mathang WHERE tenmathang LIKE :keyword";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":keyword", "{$keyword}%", PDO::PARAM_STR);
             $cmd->execute();
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
-
-            // Lọc kết quả trên PHP để chỉ giữ các mathanh có tên bắt đầu bằng chữ cái đầu của từ khóa
-            $filteredResult = array_filter($result, function ($item) use ($keyword) {
-                return stripos($item['tenmathang'], $keyword) === 0;
-            });
-            return $filteredResult;
-        } 
-        catch (PDOException $e) {
+            return $result;
+        } catch (PDOException $e) {
             // Xử lý lỗi nếu cần 
-           // echo "<p>Lỗi truy vấn: $error_message=$e->getMessage()</p>";
+            // echo "<p>Lỗi truy vấn: $error_message=$e->getMessage()</p>";
             return null;
         }
     }
