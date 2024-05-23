@@ -10,10 +10,11 @@
       <div class="card-body">
         <form method="post" enctype="multipart/form-data" action="../ktnguoidung/index.php">
           <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoidung"]["id"]; ?>">
-          <input type="hidden" name="txthinhanh" value="<?php echo $_SESSION["nguoidung"]["hinhanh"]; ?>">
+          <input type="hidden" name="txthinhanh" value="<?php echo "../../". $_SESSION["nguoidung"]["hinhanh"]; ?>">
           <input type="hidden" name="action" value="xlhoso">
           <div class="text-center">
-            <img class="img-thumbnail" src="<?php if ($_SESSION["nguoidung"]["hinhanh"] == NULL) echo "../../images/users/";else echo "../../images/users/" . $_SESSION["nguoidung"]["hinhanh"]; ?>" alt="<?php echo $_SESSION["nguoidung"]["hoten"]; ?>" width="100px">
+            <img class="img-thumbnail" src="<?php if ($_SESSION["nguoidung"]["hinhanh"] == NULL) echo "../../images/users/doraemon.jpg";
+                                            else echo "../../" . $_SESSION["nguoidung"]["hinhanh"]; ?>" alt="<?php echo $_SESSION["nguoidung"]["hoten"]; ?>" width="100px">
           </div>
           <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoidung"]["id"]; ?>">
           <div class="my-3">
@@ -22,20 +23,24 @@
           </div>
           <div class="my-3">
             <label class="form-label">Số điện thoại</label>
-            <input class="form-control" type="number" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["nguoidung"]["sdt"]; ?>" required>
+            <input class="form-control" type="number" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["nguoidung"]["sodienthoai"]; ?>" >
           </div>
           <div class="my-3">
             <label class="form-label">Họ tên</label>
             <input class="form-control" type="text" name="txthoten" placeholder="Họ tên" value="<?php echo $_SESSION["nguoidung"]["hoten"]; ?>" required>
           </div>
           <div class="my-3">
-            <label class="form-label">Đổi hình đại diện</label>
-            <input class="form-control" type="file" name="fhinh">
-          </div>
-          <div class="my-3 text-center">
-            <input class="btn btn-primary" type="submit" value="Cập nhật">
-            <input class="btn btn-warning" type="reset" value="Không">
-          </div>
+            <label>Hình ảnh</label><br>
+            <input type="hidden" name="txthinhanh" value="<?php echo "../../".  $_SESSION["nguoidung"]["hinhanh"]; ?>">
+            <img src="<?php echo "../../". $_SESSION["nguoidung"]["hinhanh"]; ?>" width="100" class="img-thumbnail">
+            <a data-bs-toggle="collapse" data-bs-target="#demo">Đổi hình ảnh</a>
+            <div id="demo" class="collapse m-3">
+              <input type="file" class="form-control" name="filehinhanh">
+            </div>
+            <div class="my-3 text-center">
+              <input class="btn btn-primary" type="submit" value="Cập nhật">
+              <input class="btn btn-warning" type="reset" value="Không">
+            </div>
         </form>
       </div>
 

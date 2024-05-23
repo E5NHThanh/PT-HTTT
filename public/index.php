@@ -51,21 +51,26 @@ switch ($action) {
         }
         break;
     case "chovaogio":
-        if (isset($_REQUEST["id"]))
+        if (isset($_REQUEST["id"])) {
             $id = $_REQUEST["id"];
-        if (isset($_REQUEST["soluong"]))
+        }
+        if (isset($_REQUEST["soluong"])) {
             $soluong = $_REQUEST["soluong"];
-        else
+        } else {
             $soluong = 1;
-        if (isset($_SESSION["giohang"][$id])) {
-            $soluong = $soluong + $_SESSION["giohang"][$id];
-            $_SESSION["giohang"][$id] = $soluong;
+        }
+
+        if (kiemtraTonTaiTrongGio($id)) {
+            hienthiThongBao("Sản phẩm này bạn đã có trong giỏ hàng rồi!");
         } else {
             themhangvaogio($id, $soluong);
         }
+
         $giohang = laygiohang();
         include("cart.php");
         break;
+
+
     case "giohang":
         $giohang = laygiohang();
         include("cart.php");
@@ -115,7 +120,7 @@ switch ($action) {
             //$diachi = $dc->laydiachikhachhang($khachhang_id);            
             //$diachi_id = $diachi["id"];
         }
-       
+
 
         // lưu đơn hàng
         $dh = new DONHANG();
@@ -123,19 +128,25 @@ switch ($action) {
         $donhang_id = $dh->themdonhang($khachhang_id, $tongtien);
 
         // lưu chi tiết đơn hàng
-        $ct = new DONHANGCT();
-        $giohang = laygiohang();
-        foreach ($giohang as $id => $mh) {
-            $dongia = $mh["giaban"];
-            $soluong = $mh["soluong"];
-            $thanhtien = $mh["thanhtien"];
-            $ct->themchitietdonhang($donhang_id, $id, $dongia, $soluong, $thanhtien);
-            $mh = new MATHANG();
-            $mh->capnhatsoluong($id, $soluong);
+        if ($donhang_id) {
+            // lưu chi tiết đơn hàng
+            $ct = new DONHANGCT();
+            $giohang = laygiohang();
+            foreach ($giohang as $id => $mh) {
+                $dongia = $mh["giaban"];
+                $soluong = $mh["soluong"];
+                $thanhtien = $mh["thanhtien"];
+                $ct->themchitietdonhang($donhang_id, $id, $dongia, $soluong, $thanhtien);
+                $mh = new MATHANG();
+                $mh->capnhatsoluong($id, $soluong);
+            }
+            xoagiohang();
+            // chuyển đến trang cảm ơn
+            include("message.php");
+        } else {
+            // Xử lý lỗi khi không thể thêm đơn hàng
+            echo "Lỗi: Không thể thêm đơn hàng.";
         }
-        xoagiohang();
-        // chuyển đến trang cảm ơn
-        include("message.php");
         break;
 
 
@@ -186,39 +197,39 @@ switch ($action) {
         $mathang = $mh->laymathang();
         include("main.php");
         break;
-        case "dangky":
-            include("dangky.php");
-            break;
-    
-        case "themdangky":
-            if (!isset($_SESSION["khachhang"])) {
-                $email = $_POST["txtemail"];
-                $matkhau = $_POST["txtpass"];
-                $hoten = $_POST["txthoten"];
-                $sodienthoai = $_POST["txtsodienthoai"];
-                $namsinh = $_POST["txtnamsinh"];
-                $gioitinh = $_POST["txtgioitinh"];
-                $diachi = $_POST["txtdiachi"];
-                // Xác định thư mục lưu trữ ảnh
-                $thumuc_luutru = "image/users/";
-    
-                // Tạo đường dẫn đầy đủ cho file ảnh
-                $duongdan = "../" . $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
-                    // Tiếp theo, bạn có thể sử dụng biến $thumuc_luutru để lưu đường dẫn trong cơ sở dữ liệu.
-                // Ví dụ:
-                $hinhanh = $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
-    
-                // lưu thông tin khách nếu chưa có trong db (kiểm tra email có tồn tại chưa)
-                // xử lý thêm...
-                $kh = new KHACHHANG();
-                $khachhang_id = $kh->themdangky($email, $sodienthoai, $matkhau, $hoten, $hinhanh, $gioitinh, $diachi,$namsinh);
-            } else {
-                $khachhang_id = $_SESSION["khachhang"]["id"];
-            }
-    
-            include("loginform.php");
-            break;
-    
+    case "dangky":
+        include("dangky.php");
+        break;
+
+    case "themdangky":
+        if (!isset($_SESSION["khachhang"])) {
+            $email = $_POST["txtemail"];
+            $matkhau = $_POST["txtpass"];
+            $hoten = $_POST["txthoten"];
+            $sodienthoai = $_POST["txtsodienthoai"];
+            $namsinh = $_POST["txtnamsinh"];
+            $gioitinh = $_POST["txtgioitinh"];
+            $diachi = $_POST["txtdiachi"];
+            // Xác định thư mục lưu trữ ảnh
+            $thumuc_luutru = "image/users/";
+
+            // Tạo đường dẫn đầy đủ cho file ảnh
+            $duongdan = "../" . $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
+            // Tiếp theo, bạn có thể sử dụng biến $thumuc_luutru để lưu đường dẫn trong cơ sở dữ liệu.
+            // Ví dụ:
+            $hinhanh = $thumuc_luutru . basename($_FILES["txthinhanh"]["name"]);
+
+            // lưu thông tin khách nếu chưa có trong db (kiểm tra email có tồn tại chưa)
+            // xử lý thêm...
+            $kh = new KHACHHANG();
+            $khachhang_id = $kh->themdangky($email, $sodienthoai, $matkhau, $hoten, $hinhanh, $gioitinh, $diachi, $namsinh);
+        } else {
+            $khachhang_id = $_SESSION["khachhang"]["id"];
+        }
+
+        include("loginform.php");
+        break;
+
     default:
         break;
 }

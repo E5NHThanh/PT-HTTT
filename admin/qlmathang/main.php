@@ -33,11 +33,17 @@
 				</a>
 			</td>
 			<td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $m["id"]; ?>"><i class="align-middle" data-feather="edit"></a></td>
-			<td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $m["id"]; ?>"><i class="align-middle" data-feather="trash-2"></a></td>
+			<td><a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete(<?php echo $m['id']; ?>);" ><i class="align-middle" data-feather="trash"></a></td>
 		</tr>
 	<?php
 	endforeach;
 	?>
 </table>
-
+<script>
+	function confirmDelete(id) {
+		if (confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
+			window.location.href = 'index.php?action=xoa&id=' + id;
+		}
+	}
+</script>
 <?php include("../inc/bottom.php"); ?>

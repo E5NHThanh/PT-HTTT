@@ -4,13 +4,6 @@ if (!isset($_SESSION['giohang']) ) {
     $_SESSION['giohang'] = array();
 }
 
-// Hàm thêm sản phẩm vào giỏ
-function themhangvaogio($id, $soluong) {
-    //Cập nhập Số lượng vào SESSION - Làm tròn
-    $_SESSION['giohang'][$id] = round($soluong, 0);
-}
-
-
 // Cập nhật số lượng của giỏ hàng
 function capnhatsoluong($id, $soluong) {
     if (isset($_SESSION['giohang'][$id])) {
@@ -82,4 +75,24 @@ function xoagiohang() {
     $_SESSION['giohang'] = array();
 }
 
+function kiemtraTonTaiTrongGio($id)
+{
+    return isset($_SESSION['giohang'][$id]);
+}
+
+// Hàm hiển thị thông báo
+function hienthiThongBao($message)
+{
+    echo '<script>alert("' . $message . '");</script>';
+}
+
+// Thêm sản phẩm vào giỏ hàng
+function themhangvaogio($id, $soluong)
+{
+    if (!kiemtraTonTaiTrongGio($id)) {
+        $_SESSION['giohang'][$id] = round($soluong, 0);
+    } else {
+        hienthiThongBao("Sản phẩm này bạn đã có trong giỏ hàng rồi!");
+    }
+}
 ?>

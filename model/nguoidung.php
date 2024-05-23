@@ -7,7 +7,7 @@ class NGUOIDUNG
 	{
 		$db = DATABASE::connect();
 		try {
-			$sql = "SELECT * FROM nguoidung WHERE email=:email AND matkhau=:matkhau AND trangthai=1";
+			$sql = "SELECT * FROM nguoidung WHERE email=:email AND matkhau=:matkhau AND trangthai=1 AND loai=1";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(":email", $email);
 			$cmd->bindValue(":matkhau", md5($matkhau));
@@ -60,14 +60,14 @@ class NGUOIDUNG
 
 	// Thêm ng dùng mới, trả về khóa của dòng mới thêm
 	// (SV nên truyền tham số là 1 đối tượng kiểu người dùng, không nên truyền nhiều tham số rời rạc như thế này)
-	public function themnguoidung($email,$matkhau,$sodt,$hoten,$loai){
+	public function themnguoidung($email,$matkhau,$sodienthoai,$hoten,$loai){
 		$db = DATABASE::connect();
 		try{
-			$sql = "INSERT INTO nguoidung(email,matkhau,sdt,hoten,loai) VALUES(:email,:matkhau,:sodt,:hoten,:loai)";
+			$sql = "INSERT INTO nguoidung(email,matkhau,sodienthoai,hoten,loai) VALUES(:email,:matkhau,:sodienthoai,:hoten,:loai)";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':email',$email);
 			$cmd->bindValue(':matkhau',md5($matkhau));
-			$cmd->bindValue(':sodt',$sodt);
+			$cmd->bindValue(':sodienthoai',$sodienthoai);
 			$cmd->bindValue(':hoten',$hoten);
 			$cmd->bindValue(':loai',$loai);
 			$cmd->execute();
@@ -83,15 +83,15 @@ class NGUOIDUNG
 
 	// Cập nhật thông tin ng dùng: họ tên, số đt, email, ảnh đại diện 
 	// (SV nên truyền tham số là 1 đối tượng kiểu người dùng, không nên truyền nhiều tham số rời rạc như thế này)
-	public function capnhatnguoidung($id, $email, $sodt, $hoten, $hinhanh)
+	public function capnhatnguoidung($id, $email, $sodienthoai, $hoten, $hinhanh)
 	{
 		$db = DATABASE::connect();
 		try {
-			$sql = "UPDATE nguoidung set hoten=:hoten, email=email, sdt=:sodt, hinhanh=:hinhanh where id=:id";
+			$sql = "UPDATE nguoidung set hoten=:hoten, email=email, sdt=:sodienthoai, hinhanh=:hinhanh where id=:id";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':id', $id);
 			$cmd->bindValue('email', $email);
-			$cmd->bindValue(':sdt', $sodt);
+			$cmd->bindValue(':sodienthoai', $sodienthoai);
 			$cmd->bindValue(':hoten', $hoten);
 			$cmd->bindValue(':hinhanh', $hinhanh);
 			$ketqua = $cmd->execute();

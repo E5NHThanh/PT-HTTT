@@ -1,9 +1,11 @@
 <?php include("inc/top.php") ?>
+<div class="text-center mt-5" >
 <?php
 if (demhangtronggio() == 0) {
 ?>
-    <h3 class="text-danger text-md-center mt-5"> Giỏ hàng rỗng</h3>
-    <p class="text-md-center" >Vui lòng chọn sản phẩm</p>
+    <img src="../images/product/empty-cart.webp" alt="" style="width: auto; height:200px;margin-top:20px; ">
+            <h3 class="tex-info"> Nhấn vào nút bên dưới để chọn sản phẩm</h3>
+            <a style="margin-bottom:50px;" href="index.php?action=null" class="btn btn-outline-info">Vui lòng chọn sản phẩm</a>
 <?php
 } else {
 ?>
@@ -46,8 +48,9 @@ if (demhangtronggio() == 0) {
     </form>
 <?php
 }
-
 ?>
+</div>
 <?php
+
 include("inc/bottom.php");
 ?>

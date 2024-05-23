@@ -46,7 +46,6 @@
 			<label>Số điện thoại</label>
 			<input type="text" class="form-control" name="txtdienthoai" required>
 		</div>
-		
 		<div class="my-3">
 			<input type="submit" value="Hoàn tất đơn hàng" class="btn btn-primary">
 		</div>

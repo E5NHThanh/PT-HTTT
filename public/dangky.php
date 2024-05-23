@@ -23,6 +23,7 @@
                 <div class="mb-3">
                     <label for="txtsodienthoai" class="form-label">Số Điện Thoại</label>
                     <input type="text" class="form-control" id="txtsodienthoai" name="txtsodienthoai" required>
+                    <span class="invalid-feedback"></span><br>
                 </div>
                 <div class="mb-3">
                     <label for="txtnamsinh" class="form-label">Năm Sinh</label>
@@ -122,15 +123,15 @@
 
     // Hàm kiểm tra điều kiện và kích hoạt hoặc vô hiệu hóa nút Đăng ký
     function checkSubmitButton() {
-        var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("txtemail").value);
-        var passwordValid = /^(?=.*[!@#$%^&*])(?=.{5,})/.test(document.getElementById("txtpass").value);
-        var nameValid = !/\d/.test(document.getElementById("txthoten").value);
-        var phoneValid = /^\d{10}$/.test(document.getElementById("txtsodienthoai").value);
-        var submitButton = document.getElementById("submitBtn");
-        if (emailValid && passwordValid && nameValid && phoneValid) {
-            submitButton.removeAttribute("disabled");   
-        } else {
-            submitButton.setAttribute("disabled", "disabled");
+            var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("txtemail").value);
+            var passwordValid = /^(?=.*[!@#$%^&*])(?=.{5,})/.test(document.getElementById("txtpass").value);
+            var nameValid = !/\d/.test(document.getElementById("txthoten").value);
+            var phoneValid = /^(0\d{9})$/.test(document.getElementById("txtsodienthoai").value);
+            var submitButton = document.getElementById("submitBtn");
+            if (emailValid && passwordValid && nameValid && phoneValid) {
+                submitButton.removeAttribute("disabled");
+            } else {
+                submitButton.setAttribute("disabled", "disabled");
+            }
         }
-    }
 </script>

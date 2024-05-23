@@ -60,13 +60,13 @@
                 <!-- end search -->
                 <div class="d-flex align-items-center ms-3">
                     <?php if (isset($_SESSION["khachhang"])) { ?>
-                        <span class="text-light me-2">Chào, <?php echo $_SESSION["khachhang"]["hoten"]; ?></span>
-                        <a href="index.php?action=thongtin" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-person"></i></a>
-                        <a href="index.php?action=dangxuat" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-box-arrow-right"></i></a>
+                        <span class="text-dark me-2">Chào <a class="text-danger"><?php echo $_SESSION["khachhang"]["hoten"]; ?></a> </span>
+                        <a href="index.php?action=thongtin" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-person"></i></a>
+                        <a href="index.php?action=dangxuat" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-box-arrow-right"></i></a>
                     <?php } else { ?>
-                        <a href="index.php?action=dangnhap" class="btn btn-outline-light btn-sm me-2"><i class="bi bi-person"></i></a>
+                        <a href="index.php?action=dangnhap" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-person"></i></a>
                     <?php } ?>
-                    <a href="index.php?action=giohang" class="btn btn-outline-light btn-sm">
+                    <a href="index.php?action=giohang" class="btn btn-outline-dark btn-sm">
                         <i class="bi bi-cart3"></i> <span class="badge bg-danger text-white ms-1 rounded-pill"><?php echo demhangtronggio(); ?></span>
                     </a>
                 </div>

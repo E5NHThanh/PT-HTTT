@@ -46,18 +46,27 @@ switch ($action) {
     case "xlhoso":
         $mand = $_POST["txtid"];
         $email = $_POST["txtemail"];
-        $sdt = $_POST["txtdienthoai"];
+        $sodienthoai = $_POST["txtdienthoai"];
         $hoten = $_POST["txthoten"];
         $hinhanh = $_POST["txthinhanh"];
 
-        if ($_FILES["fhinh"]["name"] != null) {
-            $hinhanh = basename($_FILES["fhinh"]["name"]);
-            $duongdan = "../../images/users/" . $hinhanh;
-            move_uploaded_file($_FILES["fhinh"]["tmp_name"], $duongdan);
+        // upload file mới (nếu có)
+        if ($_FILES["filehinhanh"]["name"] != "") {
+            // xử lý file upload -- Cần bổ dung kiểm tra: dung lượng, kiểu file, ...       
+            $hinhanh_moi = "images/users/" . basename($_FILES["filehinhanh"]["name"]); // đường dẫn lưu csdl
+            $duongdan_moi = "../../" . $hinhanh_moi; // đường dẫn lưu upload file        
+            move_uploaded_file($_FILES["filehinhanh"]["tmp_name"], $duongdan_moi);
+            // Cập nhật đường dẫn ảnh mới
+            $hinhanh = $hinhanh_moi;
         }
 
-        $nd->capnhatnguoidung($mand, $email, $sdt, $hoten, $hinhanh);
-
+        // Chỉ cập nhật ảnh nếu có tập tin ảnh mới
+        if ($_FILES["filehinhanh"]["name"] != "") {
+            $nd->capnhatnguoidung($mand, $email, $sodienthoai, $hoten, $hinhanh);
+        } else {
+            // Nếu không có ảnh mới, chỉ cập nhật thông tin khác
+            $nd->capnhatnguoidungKhongAnh($mand, $email, $sodt, $hoten);
+        }
         $_SESSION["nguoidung"] = $nd->laythongtinnguoidung($email);
         include("main.php");
         break;
@@ -76,18 +85,16 @@ switch ($action) {
         break;
 
 
-
-
     case "xlthem":
         $email = $_POST["txtemail"];
         $matkhau = $_POST["txtmatkhau"];
-        $sdt = $_POST["txtdienthoai"];
+        $sodienthoai = $_POST["txtdienthoai"];
         $hoten = $_POST["txthoten"];
         $loai = $_POST["loai"];
         if ($nguoidung->laythongtinnguoidung($email)) {   // có thể kiểm tra thêm số đt không trùng
             $tb = "Email này đã được cấp tài khoản!";
         } else {
-            if (!$nguoidung->themnguoidung($email, $matkhau, $sđt, $hoten, 3)) {
+            if (!$nguoidung->themnguoidung($email, $matkhau, $sodienthoai, $hoten, 3)) {
                 $tb = "Không thêm được!";
             }
         }

@@ -25,9 +25,9 @@ switch ($action) {
                         return strcmp($a["email"], $b["email"]);
                     });
                     break;
-                case 'sdt':
+                case 'sodienthoai':
                     usort($nguoidung, function ($a, $b) {
-                        return strcmp($b["sdt"], $a["sdt"]);
+                        return strcmp($b["sodienthoai"], $a["sodienthoai"]);
                     });
                     break;
                 case 'hoten':
@@ -63,13 +63,13 @@ switch ($action) {
     case "xlthem":
         $email = $_POST["txtemail"];
         $matkhau = $_POST["txtmatkhau"];
-        $sdt = $_POST["txtdienthoai"];
+        $sodienthoai = $_POST["txtdienthoai"];
         $hoten = $_POST["txthoten"];
         $loai = 3 ;
         if ($nguoidung->laythongtinnguoidung($email)) {   // có thể kiểm tra thêm số đt không trùng
             $tb = "Email này đã được cấp tài khoản!";
         } else {
-            if (!$nguoidung->themnguoidung($email, $matkhau, $sdt, $hoten, 3)) {
+            if (!$nguoidung->themnguoidung($email, $matkhau, $sodienthoai, $hoten, 3)) {
                 $tb = "Không thêm được!";
             }
         }
